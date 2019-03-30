@@ -12,14 +12,14 @@ app.use(cors())
 const queueEvent = new EventEmitter()
 
 const consumer = Consumer.create({
-  queueUrl: `https://sqs.sa-east-1.amazonaws.com/${process.env.AWS_ACCOUNT_ID}/${process.env.QUEUE_NAME}`,
+  queueUrl: `https://sqs.us-east-1.amazonaws.com/${process.env.AWS_ACCOUNT_ID}/${process.env.QUEUE_NAME}`,
   handleMessage: async (message) => {
     queueEvent.emit('message', message)
   }
 })
 
 app.get('/events', sseExpress, (req, res) => {
-  queueEvent.on('message', () => {
+  queueEvent.on('message', (message) => {
     res.sse('event', message)
   })
 })
