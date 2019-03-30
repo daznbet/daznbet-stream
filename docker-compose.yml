@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  stream:
+    ports:
+      - "4000:4000"
+    build: .
+    volumes:
+      - ./src:/usr/src
+    env_file: .env
+
+    command: node_modules/.bin/nodemon src/index.js
