@@ -20,7 +20,7 @@ const consumer = Consumer.create({
 
 app.get('/events', sseExpress, (req, res) => {
   queueEvent.on('message', (evt) => {
-    res.sse(evt.Body.message, evt.Body)
+    res.sse(JSON.parse(evt.Body).message, evt.Body)
   })
 })
 
