@@ -19,11 +19,11 @@ const consumer = Consumer.create({
 })
 
 app.get('/events', sseExpress, (req, res) => {
-  queueEvent.on('message', (message) => {
-    res.sse('event', message)
+  queueEvent.on('message', (evt) => {
+    res.sse(evt.Body.message, evt.Body)
   })
 })
 
 consumer.start()
 
-app.listen(port, () => console.log(`dazn-stream listening on port ${port}!`))
+app.listen(port, () => console.log(`daznbet-stream listening on port ${port}!`))
