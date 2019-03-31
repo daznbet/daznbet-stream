@@ -5,7 +5,7 @@ const { Consumer } = require('sqs-consumer')
 const EventEmitter = require('events')
 
 const app = express()
-const port = 4000
+const port = process.env.HTTP_PORT
 
 app.use(cors())
 
